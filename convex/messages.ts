@@ -1,3 +1,5 @@
+// File: hlpp/convex/messages.ts
+
 import { query } from "./_generated/server";
 
 export const getForCurrentUser = query({
@@ -17,9 +19,7 @@ export const getForCurrentUser = query({
       return [];
     }
 
-    return await ctx.db
-      .query("hardware_specs")
-      .filter((q) => q.eq(q.field("submittedBy"), user._id))
-      .collect();
+    // Returning empty array since hardware_specs have been removed
+    return [];
   },
 });

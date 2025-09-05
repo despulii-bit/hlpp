@@ -1,15 +1,8 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
+// Hardware_specs table has been removed.
 export default defineSchema({
-  hardware_specs: defineTable({
-    manufacturer: v.string(),
-    model: v.string(),
-    powerDraw: v.number(),
-    submittedBy: v.id("users"),
-    upvotes: v.number(),
-    downvotes: v.number(),
-  }),
   listings: defineTable({
     title: v.string(),
     description: v.string(),

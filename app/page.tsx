@@ -1,35 +1,38 @@
 "use client";
 
-import { Authenticated, Unauthenticated } from "convex/react";
-import { SignInButton, UserButton } from "@clerk/nextjs";
-import { useQuery } from "convex/react";
-import { api } from "../convex/_generated/api";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  return (
-    <>
-      <Authenticated>
-        <UserButton />
-        <Content />
-      </Authenticated>
-      <Unauthenticated>
-        <SignInButton />
-      </Unauthenticated>
-    </>
-  );
-}
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
 
-import HardwareSubmissionForm from "@/components/HardwareSubmissionForm";
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = searchTerm.trim();
+    if (trimmed) {
+      router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+    }
+  };
 
-function Content() {
-  const messages = useQuery(api.messages.getForCurrentUser);
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Submit New Hardware</h1>
-      <HardwareSubmissionForm />
-      <hr className="my-8" />
-      <h2 className="text-xl font-bold mb-4">Authenticated Content</h2>
-      <div>Messages: {messages?.length ?? "Loading..."}</div>
+      <h1 className="text-2xl font-bold mb-4">Hardware Parts Finder</h1>
+      <form onSubmit={handleSubmit} className="flex space-x-2">
+        <input
+          type="text"
+          placeholder="Search hardware parts..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex-1 border border-gray-300 rounded px-3 py-2"
+        />
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Search
+        </button>
+      </form>
     </main>
   );
 }
