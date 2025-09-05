@@ -5,11 +5,21 @@ export const getForCurrentUser = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (identity === null) {
-      throw new Error("Not authenticated");
+      return [];
     }
+
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("name"), identity.name!))
+      .first();
+
+    if (user === null) {
+      return [];
+    }
+
     return await ctx.db
-      .query("messages")
-      .filter((q) => q.eq(q.field("author"), identity.email))
+      .query("hardware_specs")
+      .filter((q) => q.eq(q.field("submittedBy"), user._id))
       .collect();
   },
 });

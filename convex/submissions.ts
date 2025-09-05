@@ -31,11 +31,10 @@ export const submitHardware = mutation({
       userId = user._id;
     }
 
-    const submissionId = await ctx.db.insert("hardwareSubmissions", {
+    const submissionId = await ctx.db.insert("hardware_specs", {
       manufacturer: args.manufacturer,
       model: args.model,
       powerDraw: args.powerDraw,
-      status: "pending",
       submittedBy: userId,
       upvotes: 0,
       downvotes: 0,
