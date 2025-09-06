@@ -5,7 +5,15 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["vendor", "model", "description", "url", "specs"],
+    "required": [
+      "vendor",
+      "model",
+      "description",
+      "store_code",
+      "product_id",
+      "product_name",
+      "specs"
+    ],
     "properties": {
       "vendor": {
         "type": "string",
@@ -19,34 +27,54 @@
         "type": "string",
         "description": "A brief description of the product."
       },
-      "url": {
+      "store_code": {
         "type": "string",
-        "description": "A URL to a product page or a search result."
+        "description": "A code identifying the store where the product is listed (e.g., amazon-us, ebay-us).",
+        "pattern": "^[a-z]+-[a-z]{2}$"
+      },
+      "product_id": {
+        "type": "string",
+        "description": "The unique identifier for the product on the store's website."
+      },
+      "product_name": {
+        "type": "string",
+        "description": "The name of the product as listed on the store's website."
       },
       "specs": {
         "type": "object",
+        "required": [
+          "controller_mode",
+          "operating_mode",
+          "pcie",
+          "connectors",
+          "data_rate",
+          "controller",
+          "form_factor"
+        ],
         "properties": {
-          "Controller Mode": {
+          "controller_mode": {
             "type": "string",
             "description": "The mode of the controller, e.g., SAS, FC, or CNA."
           },
-          "Operating Mode": {
+          "operating_mode": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "The operating modes supported by the HBA, such as IT or IR."
           },
-          "PCIe": {
+          "pcie": {
             "type": "object",
+            "required": ["generation", "lanes", "throughput_mb_s"],
             "properties": {
               "generation": {
-                "type": "string",
+                "type": "number",
                 "description": "The PCIe generation, e.g., 2.0 or 3.0."
               },
               "lanes": {
                 "type": "string",
-                "description": "The number of PCIe lanes, e.g., x8."
+                "description": "The number of PCIe lanes, e.g., x8.",
+                "pattern": "^x\\d+$"
               },
               "throughput_mb_s": {
                 "type": "number",
@@ -54,10 +82,11 @@
               }
             }
           },
-          "Connectors": {
+          "connectors": {
             "type": "array",
             "items": {
               "type": "object",
+              "required": ["type", "location", "lanes", "count"],
               "properties": {
                 "type": {
                   "type": "string",
@@ -65,6 +94,7 @@
                 },
                 "location": {
                   "type": "string",
+                  "enum": ["internal", "external"],
                   "description": "The location of the connector (internal or external)."
                 },
                 "lanes": {
@@ -78,11 +108,11 @@
               }
             }
           },
-          "Data Rate": {
+          "data_rate": {
             "type": "string",
             "description": "The data transfer rate per port, e.g., 6Gb/s."
           },
-          "Bandwidth": {
+          "bandwidth": {
             "type": "object",
             "properties": {
               "per_lane_mb_s": {
@@ -91,7 +121,7 @@
               }
             }
           },
-          "Controller": {
+          "controller": {
             "type": "string",
             "description": "The specific controller chip used on the card."
           },
@@ -99,11 +129,11 @@
             "type": "string",
             "description": "The specific chipset of the controller."
           },
-          "Form Factor": {
+          "form_factor": {
             "type": "string",
             "description": "The physical form factor of the card, e.g., Low Profile."
           },
-          "Dimensions": {
+          "dimensions": {
             "type": "object",
             "properties": {
               "length_inches": {
@@ -116,25 +146,25 @@
               }
             }
           },
-          "Brackets Included": {
+          "brackets_included": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "The types of mounting brackets included with the card."
           },
-          "Cable Support": {
+          "cable_support": {
             "type": "string",
             "description": "The type of cable supported by the connectors, e.g., Passive Copper."
           },
-          "Operating Voltage": {
+          "operating_voltage": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "The operating voltage required for the card."
           },
-          "Power Consumption": {
+          "power_consumption": {
             "type": "object",
             "properties": {
               "nominal_watts": {
@@ -147,7 +177,7 @@
               }
             }
           },
-          "Device Support": {
+          "device_support": {
             "type": "object",
             "properties": {
               "max_devices": {
@@ -163,7 +193,7 @@
               }
             }
           },
-          "RAID Support": {
+          "raid_support": {
             "type": "string",
             "description": "Whether the card supports Integrated RAID (IR) or is IT mode."
           },
@@ -184,31 +214,33 @@
               }
             }
           },
-          "Cooling": {
+          "cooling": {
             "type": "string",
             "description": "The cooling method used."
           },
-          "Environmental": {
+          "environmental": {
             "type": "object",
             "properties": {
-              "operating_temperature": {
+              "operating_temperature_c": {
                 "type": "object",
+                "required": ["min", "max"],
                 "properties": {
-                  "min_temp_c": {
+                  "min": {
                     "type": "number"
                   },
-                  "max_temp_c": {
+                  "max": {
                     "type": "number"
                   }
                 }
               },
-              "storage_temperature": {
+              "storage_temperature_c": {
                 "type": "object",
+                "required": ["min", "max"],
                 "properties": {
-                  "min_temp_c": {
+                  "min": {
                     "type": "number"
                   },
-                  "max_temp_c": {
+                  "max": {
                     "type": "number"
                   }
                 }
@@ -219,25 +251,25 @@
               }
             }
           },
-          "MTBF": {
+          "mtbf": {
             "type": "string",
             "description": "Mean Time Between Failures."
           },
-          "Regulatory Certifications": {
+          "regulatory_certifications": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "List of regulatory certifications."
           },
-          "Operating System Support": {
+          "operating_system_support": {
             "type": "array",
             "items": {
               "type": "string"
             },
             "description": "List of supported operating systems."
           },
-          "Warranty": {
+          "warranty": {
             "type": "string",
             "description": "The warranty period."
           }

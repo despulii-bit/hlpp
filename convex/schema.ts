@@ -19,4 +19,8 @@ export default defineSchema({
     content: v.any(),
     timestamp: v.string(),
   }),
+  affiliate_links: defineTable({
+    store_name: v.string(),
+    link_template: v.string(),
+  }),
 });
