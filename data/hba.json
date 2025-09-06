@@ -1,0 +1,230 @@
+[
+  {
+    "vendor": "Avago Technologies (formerly LSI)",
+    "model": "LSI SAS 9211-8i",
+    "description": "PCI Express to 6Gb/s Serial Attached SCSI (SAS) Host Bus Adapter.",
+    "url": "https://www.ebay.com/itm/153072616657?_trkparms=amclksrc%3DITM%26aid%3D777008%26algo%3DPERSONAL.TOPIC%26ao%3D1%26asc%3D20230823115209%26meid%3Df284a514a8a14860a8c8536a02e7cac9%26pid%3D101800%26rk%3D1%26rkt%3D1%26itm%3D153072616657%26pmt%3D1%26noa%3D1%26pg%3D4375194%26algv%3DRecentlyViewedItemsV2SignedOut%26brand%3DLSI&_trksid=p4375194.c101800.m5481&_trkparms=parentrq%3A1d61fd091990a2d847973668fff8b244%7Cpageci%3Ad73d0062-8add-11f0-a82c-56865e499d18%7Ciid%3A1%7Cvlpname%3Avlp_homepage",
+    "specs": {
+      "Controller Mode": "SAS",
+      "Operating Mode": ["IR (Integrated RAID)"],
+      "PCIe": {
+        "generation": "2.0",
+        "lanes": "x8",
+        "throughput_mb_s": 5000
+      },
+      "Connectors": [
+        {
+          "type": "SFF-8087",
+          "location": "internal",
+          "lanes": 4,
+          "count": 2
+        }
+      ],
+      "Data Rate": "6Gb/s",
+      "Bandwidth": {
+        "per_lane_mb_s": 600
+      },
+      "Controller": "LSI SAS 2008",
+      "chipset": "LSI SAS 2008",
+      "Form Factor": "Low Profile",
+      "Dimensions": {
+        "length_inches": 6.6,
+        "width_inches": 2.73
+      },
+      "Brackets Included": ["Full-height", "Low-profile"],
+      "Cable Support": "Passive Copper",
+      "Operating Voltage": ["12.0 V"],
+      "Power Consumption": {
+        "nominal_watts": 8.04,
+        "required_airflow_lfm": null
+      },
+      "Device Support": {
+        "max_devices": 256,
+        "types": ["SATA", "SAS"]
+      },
+      "RAID Support": "IR (Integrated RAID) - RAID 0, RAID 1, RAID 10, RAID 1E",
+      "Cooling": null,
+      "Environmental": {
+        "operating_temperature": {
+          "min_temp_c": 0,
+          "max_temp_c": 55
+        },
+        "storage_temperature": {
+          "min_temp_c": -45,
+          "max_temp_c": 105
+        },
+        "humidity": "5 percent to 90 percent noncondensing"
+      },
+      "MTBF": null,
+      "Regulatory Certifications": [
+        "CE mark",
+        "C-Tick mark",
+        "Canadian Compliance Statement",
+        "Korean KCC",
+        "Taiwan BSMI",
+        "Japan VCCI",
+        "FCC Class B"
+      ],
+      "Operating System Support": [
+        "Windows",
+        "Linux Red Hat",
+        "Linux SUSE Enterprise Server (SLES)",
+        "Solaris",
+        "VMware"
+      ],
+      "Warranty": null,
+      "firmware_details": null
+    }
+  },
+  {
+    "vendor": "IBM (cross-flashed to LSI/Avago)",
+    "model": "9302-8i ServeRAID N2215",
+    "description": "An IBM ServeRAID N2215 card, equivalent to the LSI 9302-8i, which has been cross-flashed to LSI 9300-8i IT mode firmware for use with ZFS and other similar file systems.",
+    "url": "https://www.ebay.com/itm/166645411363?_skw=host+bus+adapter&itmmeta=01K4FPP1K19BC6VDBFDGM5S2E1&hash=item26ccd72e23:g:dDsAAOSwbJBn6jHz&itmprp=enc%3AAQAKAAAA8FkggFvd1GGDu0w3yXCmi1d%2FuoM0EH7wKdaqW%2FSDUZc4sTDYUHJ%2FfYWU4s%2B9%2F4s5UNkJkH--KBibJiA1Xw8jkYOScXfPixasmi76SnAP6SnfuP4I%2B%2BUJ1ksK8jCZfL7Ywckz8QQvOS2WjjhZ8IfRK%2F50CRImNKdJvIUPhS3lGAXSvAzjuaHxXDwHtspNl8ImAlkjjvX99C8Veomq1GRJ0QqKSHdFj543Q9%2Fotmt6K2MDYjkS0bfn%2FwbnMlD%2F7i9%2B4xxVsh898jHkt4o5RKpt4H7CzFkDcWur3iZqAo2PkOyYVvdvbp6MDDqxCJa67Y9giA%3D%3D%7Ctkp%3ABk9SR9aZ2PajZg",
+    "specs": {
+      "Controller Mode": "SAS",
+      "Operating Mode": ["IT (Initiator Target)"],
+      "PCIe": {
+        "generation": "3.0",
+        "lanes": "x8",
+        "throughput_mb_s": 7880
+      },
+      "Connectors": [
+        {
+          "type": "SFF-8643",
+          "location": "internal",
+          "lanes": 4,
+          "count": 2
+        }
+      ],
+      "Data Rate": "12Gb/s",
+      "Bandwidth": {
+        "per_lane_mb_s": 1200
+      },
+      "Controller": "LSI SAS3008",
+      "chipset": "LSI SAS3008",
+      "Form Factor": "PCI low profile, half-length - MD2",
+      "Dimensions": {
+        "length_inches": 6.7,
+        "width_inches": 2.7
+      },
+      "Brackets Included": null,
+      "Cable Support": "Compatible SAS cables",
+      "Operating Voltage": null,
+      "Power Consumption": {
+        "nominal_watts": null,
+        "required_airflow_lfm": null
+      },
+      "Device Support": {
+        "max_devices": null,
+        "types": ["SAS", "SATA"]
+      },
+      "RAID Support": "Non-RAID (JBOD mode)",
+      "firmware_details": {
+        "mode_firmware_version": "P16 (16.00.12.00)",
+        "bios_rom_version": "08.37.00.00",
+        "uefi_rom_version": "18.00.00.00"
+      },
+      "Cooling": null,
+      "Environmental": {
+        "operating_temperature": {
+          "min_temp_c": null,
+          "max_temp_c": null
+        },
+        "storage_temperature": {
+          "min_temp_c": null,
+          "max_temp_c": null
+        },
+        "humidity": null
+      },
+      "MTBF": null,
+      "Regulatory Certifications": null,
+      "Operating System Support": [
+        "ZFS on Linux",
+        "FreeNAS",
+        "unRAID",
+        "Proxmox VE"
+      ],
+      "Warranty": null
+    }
+  },
+  {
+    "vendor": "Avago Technologies (formerly LSI)",
+    "model": "9300-16I",
+    "description": "LSI 12Gb/s SAS HBA for high-performance internal storage connectivity.",
+    "url": "https://www.ebay.com/itm/145073438150?_skw=host+bus+adapter&itmmeta=01K4FSH5CBSFPH0KDATRY4G6K3&hash=item21c70cfdc6:g:p0QAAOSwc2tkDaC0&itmprp=enc%3AAQAKAAAA0FkggFvd1GGDu0w3yXCmi1dKdbtLSjjkF3Jc3pgEQ%2BkQnw%2BtDQtiT%2FMimmTZlYt2jTVr6qkO199hM%2BsmWTDsUzJnq4C2kBWsAIGkgEqn1jvNoIFVCaBBhZbiUVWw%2FQ%2FsjNkUOq62akx244q9yz2yUfHNunuZfdIomjdaJ4aDJ3YWWf5y%2FN5I6vjPhbanUF8zOFVW%2F5u5LUPV%2BwYGnLLoL6cBKPBLnvh0X9cjBuFb1vNln9ceqE%2FiRz4SDSfiU1YSkQng0HAAGxFyfGAjfL00MOw%3D%7Ctkp%3ABlBMUKrWxPmjZg",
+    "specs": {
+      "Controller Mode": "SAS",
+      "Operating Mode": ["IT"],
+      "PCIe": {
+        "generation": "3.0",
+        "lanes": "x8",
+        "throughput_mb_s": 7880
+      },
+      "Connectors": [
+        {
+          "type": "SFF8643",
+          "location": "internal",
+          "lanes": 4,
+          "count": 2
+        }
+      ],
+      "Data Rate": "12Gb/s",
+      "Bandwidth": {
+        "per_lane_mb_s": 1200
+      },
+      "Controller": "LSI SAS3008",
+      "chipset": "SAS3008",
+      "Form Factor": "Low profile",
+      "Dimensions": {
+        "length_inches": 6.0,
+        "width_inches": 2.6
+      },
+      "Brackets Included": ["Full height", "Low profile vented"],
+      "Cable Support": "Passive Copper",
+      "Operating Voltage": ["12V +/-8%", "3.3V +/-9%"],
+      "Power Consumption": {
+        "nominal_watts": 13,
+        "required_airflow_lfm": null
+      },
+      "Device Support": {
+        "max_devices": 1024,
+        "types": ["SAS", "SATA"]
+      },
+      "RAID Support": "Non-RAID (JBOD mode)",
+      "firmware_details": null,
+      "Cooling": null,
+      "Environmental": {
+        "operating_temperature": {
+          "min_temp_c": 0,
+          "max_temp_c": 55
+        },
+        "storage_temperature": {
+          "min_temp_c": null,
+          "max_temp_c": null
+        },
+        "humidity": "5% to 90% Non-condensing"
+      },
+      "MTBF": "> 2,800,000 hours",
+      "Regulatory Certifications": [
+        "Australia/New Zealand (AS/NZS 3548)",
+        "Canada (ICES-003)",
+        "EMC: Class B-US (CFR 47, P15B)",
+        "Europe (EN55022/EN55024)",
+        "Japan (V-3/02.04)",
+        "Korea (N-B 2-0001-404)",
+        "RoHS",
+        "Safety: EN60950",
+        "WEEE"
+      ],
+      "Operating System Support": [
+        "Microsoft Windows",
+        "Linux (SuSE , Red Hat)",
+        "Solaris",
+        "VMware",
+        "FreeBSD"
+      ],
+      "Warranty": null
+    }
+  }
+]

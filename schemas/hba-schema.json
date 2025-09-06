@@ -1,0 +1,248 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HBA Product List Schema",
+  "description": "A schema for a list of Host Bus Adapters (HBAs) and their detailed specifications.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["vendor", "model", "description", "url", "specs"],
+    "properties": {
+      "vendor": {
+        "type": "string",
+        "description": "The manufacturer of the HBA."
+      },
+      "model": {
+        "type": "string",
+        "description": "The specific model name of the HBA."
+      },
+      "description": {
+        "type": "string",
+        "description": "A brief description of the product."
+      },
+      "url": {
+        "type": "string",
+        "description": "A URL to a product page or a search result."
+      },
+      "specs": {
+        "type": "object",
+        "properties": {
+          "Controller Mode": {
+            "type": "string",
+            "description": "The mode of the controller, e.g., SAS, FC, or CNA."
+          },
+          "Operating Mode": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The operating modes supported by the HBA, such as IT or IR."
+          },
+          "PCIe": {
+            "type": "object",
+            "properties": {
+              "generation": {
+                "type": "string",
+                "description": "The PCIe generation, e.g., 2.0 or 3.0."
+              },
+              "lanes": {
+                "type": "string",
+                "description": "The number of PCIe lanes, e.g., x8."
+              },
+              "throughput_mb_s": {
+                "type": "number",
+                "description": "PCIe data burst transfer rate in MB/s."
+              }
+            }
+          },
+          "Connectors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The type of connector, e.g., SFF-8087."
+                },
+                "location": {
+                  "type": "string",
+                  "description": "The location of the connector (internal or external)."
+                },
+                "lanes": {
+                  "type": "number",
+                  "description": "Number of lanes per connector."
+                },
+                "count": {
+                  "type": "number",
+                  "description": "The number of connectors of this type on the card."
+                }
+              }
+            }
+          },
+          "Data Rate": {
+            "type": "string",
+            "description": "The data transfer rate per port, e.g., 6Gb/s."
+          },
+          "Bandwidth": {
+            "type": "object",
+            "properties": {
+              "per_lane_mb_s": {
+                "type": "number",
+                "description": "SAS bandwidth per lane in MB/s."
+              }
+            }
+          },
+          "Controller": {
+            "type": "string",
+            "description": "The specific controller chip used on the card."
+          },
+          "chipset": {
+            "type": "string",
+            "description": "The specific chipset of the controller."
+          },
+          "Form Factor": {
+            "type": "string",
+            "description": "The physical form factor of the card, e.g., Low Profile."
+          },
+          "Dimensions": {
+            "type": "object",
+            "properties": {
+              "length_inches": {
+                "type": "number",
+                "description": "The length of the card in inches."
+              },
+              "width_inches": {
+                "type": "number",
+                "description": "The width of the card in inches."
+              }
+            }
+          },
+          "Brackets Included": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The types of mounting brackets included with the card."
+          },
+          "Cable Support": {
+            "type": "string",
+            "description": "The type of cable supported by the connectors, e.g., Passive Copper."
+          },
+          "Operating Voltage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The operating voltage required for the card."
+          },
+          "Power Consumption": {
+            "type": "object",
+            "properties": {
+              "nominal_watts": {
+                "type": "number",
+                "description": "Nominal power consumption in watts."
+              },
+              "required_airflow_lfm": {
+                "type": "number",
+                "description": "Required airflow for cooling in LFM."
+              }
+            }
+          },
+          "Device Support": {
+            "type": "object",
+            "properties": {
+              "max_devices": {
+                "type": "number",
+                "description": "Maximum number of devices supported."
+              },
+              "types": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The types of devices supported, e.g., SAS/SATA."
+              }
+            }
+          },
+          "RAID Support": {
+            "type": "string",
+            "description": "Whether the card supports Integrated RAID (IR) or is IT mode."
+          },
+          "firmware_details": {
+            "type": "object",
+            "properties": {
+              "mode_firmware_version": {
+                "type": "string",
+                "description": "The firmware version flashed onto the card."
+              },
+              "bios_rom_version": {
+                "type": "string",
+                "description": "The BIOS ROM version."
+              },
+              "uefi_rom_version": {
+                "type": "string",
+                "description": "The UEFI ROM version."
+              }
+            }
+          },
+          "Cooling": {
+            "type": "string",
+            "description": "The cooling method used."
+          },
+          "Environmental": {
+            "type": "object",
+            "properties": {
+              "operating_temperature": {
+                "type": "object",
+                "properties": {
+                  "min_temp_c": {
+                    "type": "number"
+                  },
+                  "max_temp_c": {
+                    "type": "number"
+                  }
+                }
+              },
+              "storage_temperature": {
+                "type": "object",
+                "properties": {
+                  "min_temp_c": {
+                    "type": "number"
+                  },
+                  "max_temp_c": {
+                    "type": "number"
+                  }
+                }
+              },
+              "humidity": {
+                "type": "string",
+                "description": "Operating humidity range."
+              }
+            }
+          },
+          "MTBF": {
+            "type": "string",
+            "description": "Mean Time Between Failures."
+          },
+          "Regulatory Certifications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of regulatory certifications."
+          },
+          "Operating System Support": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of supported operating systems."
+          },
+          "Warranty": {
+            "type": "string",
+            "description": "The warranty period."
+          }
+        }
+      }
+    }
+  }
+}
