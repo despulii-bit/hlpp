@@ -8,16 +8,10 @@ export default defineSchema({
     description: v.string(),
     price: v.number(),
     submittedBy: v.id("users"),
-  }),
+  }).index("by_title", ["title"]),
   users: defineTable({
     name: v.string(),
     reputation: v.number(),
-  }),
-  moderation_queue: defineTable({
-    type: v.union(v.literal("hardware_spec"), v.literal("listing")),
-    submitted_by: v.id("users"),
-    content: v.any(),
-    timestamp: v.string(),
   }),
   affiliate_links: defineTable({
     store_name: v.string(),

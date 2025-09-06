@@ -1,6 +1,10 @@
 "use client";
 
 import React from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Checkbox } from "./ui/checkbox";
+import { Slider } from "./ui/slider";
 
 const SearchFilters = () => {
   return (
@@ -8,26 +12,24 @@ const SearchFilters = () => {
       <h2 className="text-lg font-semibold mb-4">Filters</h2>
       {/* Price Range Slider */}
       <div className="mb-4">
-        <label htmlFor="priceRange" className="block text-sm font-medium text-gray-700">
-          Price Range
-        </label>
-        <input type="range" id="priceRange" name="priceRange" min="0" max="1000" className="w-full" />
+        <Label htmlFor="priceRange">Price Range</Label>
+        <Slider id="priceRange" min={0} max={1000} defaultValue={[0, 500]} />
       </div>
       {/* Brand Checkboxes */}
       <div>
         <h3 className="text-md font-semibold mb-2">Brand</h3>
         <div className="space-y-2">
           <div className="flex items-center">
-            <input type="checkbox" id="brand-a" name="brand-a" className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-            <label htmlFor="brand-a" className="ml-2 block text-sm text-gray-900">
+            <Checkbox id="brand-a" />
+            <Label htmlFor="brand-a" className="ml-2">
               Brand A
-            </label>
+            </Label>
           </div>
           <div className="flex items-center">
-            <input type="checkbox" id="brand-b" name="brand-b" className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-            <label htmlFor="brand-b" className="ml-2 block text-sm text-gray-900">
+            <Checkbox id="brand-b" />
+            <Label htmlFor="brand-b" className="ml-2">
               Brand B
-            </label>
+            </Label>
           </div>
         </div>
       </div>

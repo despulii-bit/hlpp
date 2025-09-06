@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const router = useRouter();
@@ -19,19 +21,14 @@ export default function Home() {
     <main className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Hardware Parts Finder</h1>
       <form onSubmit={handleSubmit} className="flex space-x-2">
-        <input
+        <Input
           type="text"
           placeholder="Search hardware parts..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 border border-gray-300 rounded px-3 py-2"
+          className="flex-1"
         />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Search
-        </button>
+        <Button type="submit">Search</Button>
       </form>
     </main>
   );

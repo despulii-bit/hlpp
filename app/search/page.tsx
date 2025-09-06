@@ -6,39 +6,14 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import SearchFilters from "@/components/SearchFilters";
-
-const mockProducts = [
-  {
-    name: "Raspberry Pi 4",
-    imageUrl: "/file.svg",
-    retailer: "Adafruit",
-    externalLink: "https://www.adafruit.com/product/4295",
-  },
-  {
-    name: "Arduino Uno",
-    imageUrl: "/file.svg",
-    retailer: "SparkFun",
-    externalLink: "https://www.sparkfun.com/products/11021",
-  },
-  {
-    name: "NVIDIA Jetson Nano",
-    imageUrl: "/file.svg",
-    retailer: "NVIDIA",
-    externalLink:
-      "https://developer.nvidia.com/embedded/jetson-nano-developer-kit",
-  },
-];
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Button } from "@/components/ui/button";
 
 const SearchResultsPage = () => {
   const searchParams = useSearchParams();
-  const query = searchParams.get("q");
-
-  // Simulate filtering based on the query
-  const filteredProducts = query
-    ? mockProducts.filter((product) =>
-        product.name.toLowerCase().includes(query.toLowerCase()),
-      )
-    : mockProducts;
+  const query = searchParams.get("q") || "";
+  const listings = useQuery(api.listings.search, { query });
 
   return (
     <div className="flex">
@@ -49,18 +24,23 @@ const SearchResultsPage = () => {
         <h1 className="text-2xl font-bold mb-4">
           Search Results for &quot;{query}&quot;
         </h1>
-        {filteredProducts.length > 0 ? (
+        {listings && listings.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredProducts.map((product, index) => (
-              <ProductCard key={index} {...product} />
+            {listings.map((listing) => (
+              <ProductCard
+                key={listing._id}
+                title={listing.title}
+                description={listing.description}
+                price={listing.price}
+              />
             ))}
           </div>
         ) : (
           <div>
             <p>No results found for &quot;{query}&quot;.</p>
-            <Link href="/" className="text-blue-500">
-              Go back
-            </Link>
+            <Button asChild>
+              <Link href="/">Go back</Link>
+            </Button>
           </div>
         )}
       </main>
