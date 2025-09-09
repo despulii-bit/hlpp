@@ -27,6 +27,8 @@ export const seedHbaData = mutation({
         description: hba.description,
         price: 0, // Placeholder price
         submittedBy: user._id,
+        category: "HBA", // Add category
+        specs: hba.specs, // Add specs from the hba object
       });
     }
 
