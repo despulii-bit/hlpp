@@ -1,23 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 const hardwareCategories = [
   { label: "hba", value: "hba" },
+  { label: "network switch", value: "network-switch" },
+  { label: "micro computer", value: "micro-computer" },
   // add more categories here as needed
 ];
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState(
-    hardwareCategories[0].value,
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSelectCategory = (value: string) => {
+    setSelectedCategory(value);
+    router.push(`/search?q=${value}`);
+  };
+
+  const selectedCategoryLabel =
+    hardwareCategories.find((cat) => cat.value === selectedCategory)?.label ||
+    "components";
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-background text-foreground">
@@ -55,17 +67,20 @@ export default function Home() {
           hlpp
         </h1>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="lowercase min-w-[120px]">
-              {selectedCategory}
-            </Button>
+          <DropdownMenuTrigger
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "lowercase min-w-[120px]",
+            )}
+          >
+            {selectedCategoryLabel}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             {hardwareCategories.map((cat) => (
               <DropdownMenuItem
                 key={cat.value}
                 className="lowercase"
-                onSelect={() => setSelectedCategory(cat.value)}
+                onSelect={() => handleSelectCategory(cat.value)}
               >
                 {cat.label}
               </DropdownMenuItem>
