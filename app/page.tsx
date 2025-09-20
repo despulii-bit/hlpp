@@ -24,7 +24,7 @@ export default function Home() {
 
   const handleSelectCategory = (value: string) => {
     setSelectedCategory(value);
-    router.push(`/search?q=${value}`);
+    router.push(`/search/${value}`);
   };
 
   const selectedCategoryLabel =
