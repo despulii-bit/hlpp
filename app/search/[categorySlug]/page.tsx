@@ -12,47 +12,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 
-// --- DYNAMIC FILTER CONFIGURATION ---
-// In a real app, you might fetch this config from your database as well.
-// We are basing this on your `hba-schema.json`.
-const filterConfig = {
-  hba: [
-    {
-      id: "vendor",
-      name: "Vendor",
-      type: "checkbox",
-      options: ["LSI", "Broadcom", "Dell", "HP", "Intel", "Mellanox"],
-    },
-    {
-      id: "controller_mode",
-      name: "Controller Mode",
-      type: "radio",
-      options: ["SAS", "FC", "CNA"],
-    },
-    {
-      id: "pcie.generation",
-      name: "PCIe Generation",
-      type: "slider",
-      min: 2,
-      max: 5,
-      step: 1,
-    },
-    {
-      id: "form_factor",
-      name: "Form Factor",
-      type: "checkbox",
-      options: ["Low Profile", "Full Height"],
-    },
-  ],
-  // You would define similar configurations for other categories
-  "network-switch": [
-    /* ... network switch filters ... */
-  ],
-  "micro-computer": [
-    /* ... micro computer filters ... */
-  ],
-};
-
 // --- Universal Filter Renderer Component ---
 function FilterRenderer({ filter, selectedFilters, onFilterChange }: any) {
   const { id, name, type } = filter;
@@ -135,6 +94,11 @@ export default function CategoryFilterPage() {
       : "skip",
   );
 
+  const fetchedFilterConfig = useQuery(
+    api.listings.getFilterConfig,
+    categorySlug ? { categorySlug } : "skip",
+  );
+
   const handleFilterChange = (
     filterId: string,
     value: any,
@@ -145,7 +109,8 @@ export default function CategoryFilterPage() {
       const currentFilter = prev[filterId];
 
       if (
-        filterConfig.hba.find((f) => f.id === filterId)?.type === "checkbox"
+        fetchedFilterConfig?.find((f: any) => f.id === filterId)?.type ===
+        "checkbox"
       ) {
         const currentValues = Array.isArray(currentFilter) ? currentFilter : [];
         if (isSelected) {
@@ -170,8 +135,7 @@ export default function CategoryFilterPage() {
     });
   };
 
-  const currentFilters =
-    filterConfig[categorySlug as keyof typeof filterConfig] || [];
+  const currentFilters = fetchedFilterConfig || [];
 
   return (
     <div className="min-h-screen flex flex-col items-center p-8 bg-background text-foreground">
