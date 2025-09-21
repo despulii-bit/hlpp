@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
+import { Input } from "@/components/ui/input"; // Added Input component
 
 // --- Universal Filter Renderer Component ---
 function FilterRenderer({ filter, selectedFilters, onFilterChange }: any) {
@@ -62,7 +63,9 @@ function FilterRenderer({ filter, selectedFilters, onFilterChange }: any) {
     case "slider":
       return (
         <div>
-          <Label>Min Generation: {value || filter.min}</Label>
+          <Label>
+            Min {filter.name}: {value || filter.min}
+          </Label>
           <Slider
             defaultValue={[filter.min]}
             min={filter.min}
@@ -84,13 +87,22 @@ export default function CategoryFilterPage() {
   const [selectedFilters, setSelectedFilters] = useState<Record<string, any>>(
     {},
   );
+  const [searchQuery, setSearchQuery] = useState(""); // Added state for search query
+  const [sortBy, setSortBy] = useState<string | null>(null); // Added state for sorting column
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // Added state for sort order
 
   // Use a memoized query to prevent re-fetching on every render
   const listings = useQuery(
     api.listings.search,
     // Only run query if categorySlug is available
     categorySlug
-      ? { categoryName: categorySlug, filters: selectedFilters }
+      ? {
+          categoryName: categorySlug,
+          filters: selectedFilters,
+          query: searchQuery, // Pass search query to Convex
+          sortBy, // Pass sort by column to Convex
+          sortOrder, // Pass sort order to Convex
+        }
       : "skip",
   );
 
@@ -135,6 +147,15 @@ export default function CategoryFilterPage() {
     });
   };
 
+  const handleSortChange = (column: string) => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setSortOrder("asc");
+    }
+  };
+
   const currentFilters = fetchedFilterConfig || [];
 
   return (
@@ -161,13 +182,59 @@ export default function CategoryFilterPage() {
 
         {/* Product Display Area */}
         <main className="w-3/4 pl-8 border-l border-border">
-          <h2 className="text-2xl font-semibold lowercase mb-4">
-            Products ({listings?.length ?? 0} found)
-          </h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold lowercase">
+              Products ({listings?.length ?? 0} found)
+            </h2>
+            <Input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-1/3" // Adjust width as needed for the search bar
+            />
+          </div>
           {listings === undefined && <div>Loading...</div>}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-4 flex space-x-4">
+            {/* Sortable headers */}
+            <button
+              onClick={() => handleSortChange("title")}
+              className={`font-semibold lowercase px-2 py-1 rounded ${
+                sortBy === "title"
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-accent"
+              }`}
+            >
+              Name {sortBy === "title" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+            </button>
+            {/* Placeholder for Core Count - adjust 'core_count' to the actual spec key if different */}
+            <button
+              onClick={() => handleSortChange("core_count")}
+              className={`font-semibold lowercase px-2 py-1 rounded ${
+                sortBy === "core_count"
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-accent"
+              }`}
+            >
+              Core Count{" "}
+              {sortBy === "core_count" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+            </button>
+            {/* Placeholder for Price - adjust 'price' to the actual spec key if different */}
+            <button
+              onClick={() => handleSortChange("price")}
+              className={`font-semibold lowercase px-2 py-1 rounded ${
+                sortBy === "price"
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-accent"
+              }`}
+            >
+              Price{" "}
+              {sortBy === "price" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+            </button>
+          </div>
+          <div className="flex flex-col space-y-4">
             {listings && listings.length === 0 && (
-              <p className="text-muted-foreground col-span-full">
+              <p className="text-muted-foreground">
                 No products found matching your criteria.
               </p>
             )}
