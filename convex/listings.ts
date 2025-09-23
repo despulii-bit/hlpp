@@ -257,14 +257,9 @@ export const getFilterConfig = query({
   },
 });
 
-export const getListingSpecs = query({
-  handler: async (ctx) => {
-    const listings = await ctx.db.query("listings").collect();
-    return listings.map((listing) => ({
-      _id: listing._id,
-      _creationTime: listing._creationTime,
-      title: listing.title,
-      specs: listing.specs,
-    }));
+export const getListingById = query({
+  args: { id: v.id("listings") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
   },
 });

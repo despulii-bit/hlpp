@@ -207,18 +207,7 @@ export default function CategoryFilterPage() {
             >
               Name {sortBy === "title" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
             </button>
-            {/* Placeholder for Core Count - adjust 'core_count' to the actual spec key if different */}
-            <button
-              onClick={() => handleSortChange("core_count")}
-              className={`font-semibold lowercase px-2 py-1 rounded ${
-                sortBy === "core_count"
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-accent"
-              }`}
-            >
-              Core Count{" "}
-              {sortBy === "core_count" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
-            </button>
+
             {/* Placeholder for Price - adjust 'price' to the actual spec key if different */}
             <button
               onClick={() => handleSortChange("price")}
@@ -239,10 +228,16 @@ export default function CategoryFilterPage() {
               </p>
             )}
             {listings?.map((listing: any) => (
-              <Card key={listing._id} className="p-4">
-                <CardTitle>{listing.title}</CardTitle>
-                <CardDescription>{listing.description}</CardDescription>
-              </Card>
+              <Link
+                key={listing._id}
+                href={`/search/${categorySlug}/${listing._id}`}
+                className="block hover:shadow-md transition-shadow duration-200"
+              >
+                <Card className="p-4">
+                  <CardTitle>{listing.title}</CardTitle>
+                  <CardDescription>{listing.description}</CardDescription>
+                </Card>
+              </Link>
             ))}
           </div>
         </main>
