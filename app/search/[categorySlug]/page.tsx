@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useState, useMemo } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import Link from "next/link"; // Added Link import
 
 // Import UI Components
 import { Checkbox } from "@/components/ui/checkbox";
