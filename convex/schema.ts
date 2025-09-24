@@ -10,6 +10,8 @@ export default defineSchema({
     submittedBy: v.optional(v.id("users")), // Made optional for initial data ingestion
     category: v.string(), // New category field
     specs: v.any(), // New specs field to store the HBA details
+    store_code: v.optional(v.string()), // Added store_code
+    product_id: v.optional(v.string()), // Added product_id
   })
     .index("by_title", ["title"])
     .index("by_category", ["category"]), // New index for category

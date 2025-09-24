@@ -21,6 +21,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["./**/*"],
+  "include": ["./**/*", "./hba_specs.ts"],
   "exclude": ["./_generated"]
 }

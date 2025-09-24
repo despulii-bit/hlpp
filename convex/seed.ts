@@ -29,6 +29,8 @@ export const seedHbaData = mutation({
         submittedBy: user._id,
         category: "HBA", // Add category
         specs: hba.specs, // Add specs from the hba object
+        store_code: hba.store_code, // Add store code
+        product_id: hba.product_id, // Add product ID
       });
     }
 
